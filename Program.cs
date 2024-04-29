@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("AppDb");
 builder.Services.AddTransient<DataSeeder>();
+builder.Services.AddTransient<IDataRepository, DataRepository>();
 builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
@@ -33,28 +34,24 @@ void SeedData(IHost app)
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/employee/{id}", ([FromServices] EmployeeDbContext db, string id) =>
+app.MapGet("/employee/{id}", ([FromServices] IDataRepository db, string id) =>
 {
-	return db.Employees.Where(x => x.EmployeeId == id).FirstOrDefault();
+	return db.GetEmployeeById(id);
 });
 
-app.MapPut("/employee/{id}", ([FromServices] EmployeeDbContext db, Employee employee) =>
+app.MapPut("/employee/{id}", ([FromServices] IDataRepository db, Employee employee) =>
 {
-	db.Employees.Update(employee);
-	db.SaveChanges();
-	return db.Employees.Where(x => x.EmployeeId == employee.EmployeeId).FirstOrDefault();
+	return db.PutEmployee(employee);
 });
 
-app.MapGet("/employees", ([FromServices] EmployeeDbContext db) =>
+app.MapGet("/employees", ([FromServices] IDataRepository db) =>
 {
-	return db.Employees.ToList();
+	return db.GetEmployees();
 });
 
-app.MapPost("/employee", ([FromServices] EmployeeDbContext db, Employee employee) =>
+app.MapPost("/employee", ([FromServices] IDataRepository db, Employee employee) =>
 {
-	db.Employees.Add(employee);
-	db.SaveChanges();
-	return db.Employees.Where(x => x.EmployeeId == employee.EmployeeId).FirstOrDefault();
+	return db.AddEmployee(employee);
 });
 
 app.Run();

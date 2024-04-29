@@ -1,4 +1,4 @@
-﻿namespace MiniDemo;
+﻿namespace MiniDemo.Model;
 
 public class Employee
 {
@@ -7,27 +7,4 @@ public class Employee
 	public string Citizenship { get; set; }
 }
 
-// public class EmployeeCollection
-// {
-// 	public List<Employee> Employees { get; set; }
-	
-// 	public List<Employee> GetEmployees()
-// 	{
-// 		return new List<Employee>
-// 		{
-// 			new Employee
-// 			{
-// 				EmployeeId = "1",
-// 				Name = "John Doe",
-// 				Citizenship = "Kenya"
-// 			},
-// 			new Employee
-// 			{
-// 				EmployeeId = "2",
-// 				Name = "Jane Doe",
-// 				Citizenship = "Uganda"
-// 			}
-// 		};
-// 	}
-// }
 

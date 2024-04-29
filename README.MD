@@ -3,6 +3,7 @@
 - The tutorial describes how to create the project on a Windows Machine and the steps work for a .
 - The Project on this repo was ran on MacOS using:
     1. Visual Studio Code
+        - Using Net8.0
     2. SQL Server (mssql) Extension on Visual Studio Code
     3. Docker image - mcr.microsoft.com/mssql/server:latest (The AMD can run on an ARM Mac machine)
         - The aspnetwork option on running docker wasn't used

@@ -13,7 +13,11 @@ builder.Services.AddTransient<DataSeeder>();
 builder.Services.AddTransient<IDataRepository, DataRepository>();
 builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer(connectionString));
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+app.UseSwaggerUI();
 
 if(args.Length ==1 && args[0].ToLower() == "seeddata")
 	SeedData(app);
@@ -31,6 +35,7 @@ void SeedData(IHost app)
 	}
 }
 
+app.UseSwagger(x => x.SerializeAsV2 = true);
 
 app.MapGet("/", () => "Hello World!");
 

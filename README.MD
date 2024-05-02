@@ -10,3 +10,7 @@
         ```
         docker run --rm -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<PASSWORD>" -p 1433:1433 --name sqlserver -h sqlserver  -it mcr.microsoft.com/mssql/server:latest
         ```
+        - To access the database 
+        ```
+        dotnet ef database update
+        ```
